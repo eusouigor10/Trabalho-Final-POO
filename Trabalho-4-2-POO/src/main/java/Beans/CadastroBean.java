@@ -8,7 +8,7 @@ import jakarta.inject.Inject;
 public class CadastroBean {
     
     @Inject
-    UsuarioRepositoryJPA repository;
+    private UsuarioRepositoryJPA repository;
     
     private String nome;
     private String login;

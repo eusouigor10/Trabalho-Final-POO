@@ -9,7 +9,7 @@ import java.util.List;
 public class BandaBean {
 
     @Inject
-    BandaRepositoryJPA repository;
+    private BandaRepositoryJPA repository;
 
     private String nome;
     
