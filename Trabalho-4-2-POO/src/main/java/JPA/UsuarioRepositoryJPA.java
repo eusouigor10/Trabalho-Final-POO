@@ -7,7 +7,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
-@Stateless
 public class UsuarioRepositoryJPA implements UsuarioRepository {
     
     @PersistenceContext
