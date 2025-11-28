@@ -1,10 +1,12 @@
 
 package Entidades;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import java.util.Set;
 
+@Entity
 public class Usuario {
     
     @Id
@@ -48,21 +50,5 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public boolean isAdm() {
-        return adm;
-    }
-
-    public void setAdm(boolean adm) {
-        this.adm = adm;
     }
 }
