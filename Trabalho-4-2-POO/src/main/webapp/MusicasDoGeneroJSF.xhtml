@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+    <h:head>
+        <title>Ver gênero</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:dataTable value="#{generoBean.generoPassado.musicas}" var="m">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Músicas do gênero #{generoBean.generoPassado.nome}" />
+                    </f:facet>
+                    <h:outputText value="#{m.nome}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>

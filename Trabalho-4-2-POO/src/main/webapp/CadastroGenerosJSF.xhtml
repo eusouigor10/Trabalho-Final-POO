@@ -3,13 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html">
     <h:head>
-        <title>Página boas-vindas</title>
+        <title>Página de cadastro de gêneros</title>
     </h:head>
     <h:body>
         <h:form>
-            <h:outputText value="Seja bem-vindo! Escolha uma das opções abaixo" /> <br/>
-            <h:commandButton value="Cadastrar-se" action="#{cadastroBean.trazerParaPagina()}" />
-            <h:commandButton value="Fazer login" action="#{loginBean.trazerParaPagina()}" />
+            <h:outputText value="Nome do gênero " />
+            <h:inputText value="#{generoBean.nomeCadastro}" />
+            <h:commandButton value="Cadastrar" action="#{generoBean.cadastrar()}" />
         </h:form>
     </h:body>
 </html>

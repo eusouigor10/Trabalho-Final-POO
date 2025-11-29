@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,7 +18,7 @@ public class Genero {
     String nome;
     
     @OneToMany(mappedBy = "genero")
-    private Set<Musica> musicas;
+    private List<Musica> musicas;
 
     public String getNome() {
         return nome;
@@ -27,11 +28,11 @@ public class Genero {
         this.nome = nome;
     }
 
-    public Set<Musica> getMusicas() {
+    public List<Musica> getMusicas() {
         return musicas;
     }
 
-    public void setMusica(Set<Musica> musica) {
+    public void setMusica(List<Musica> musica) {
         this.musicas = musica;
     }
 }

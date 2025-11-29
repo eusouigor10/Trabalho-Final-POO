@@ -1,11 +1,30 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="jakarta.faces.html">
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Página de gêneros</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <h:form>
+            <h:outputText value="Buscar por nome " /> 
+            <h:inputText value="#{generoBean.nomeBusca}">
+                <f:ajax event="keyup" render="tabela" />
+            </h:inputText> <br/>
+            <h:dataTable id="tabela" value="#{generoBean.listaFiltrada}" var="g" >
+                <h:column>
+                    <f:facet name="header" >
+                        <h:outputText value="Gênero" />
+                    </f:facet>
+                    <h:outputText value="#{g.nome}" />
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Ver" action="#{generoBean.enviarParaPaginaDeMusicas(g)}" />
+                </h:column>
+            </h:dataTable>
+            <h:commandButton value="Cadastrar gênero" action="#{generoBean.enviarParaPaginaDeCadastro()}" />
+            <h:outputText value="#{generoBean.mensagemResultadoCadastro}" />
+        </h:form>
     </h:body>
 </html>

@@ -1,31 +1,30 @@
 package Beans;
 
 import Entidades.Genero;
+import Entidades.Musica;
 import Repository.GeneroRepository;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-<<<<<<< Updated upstream
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named("generoBean")
 @ViewScoped
-public class GeneroBean implements Serializable{
-=======
-import java.util.List;
-
-@Named("generoBean")
-public class GeneroBean {
->>>>>>> Stashed changes
+public class GeneroBean implements Serializable {
 
     @Inject
     private GeneroRepository generoRepository;
-    
+
     private Genero genero = new Genero();
     private List<Genero> generos;
-    private String nomeBusca;
+    private String nome;
     private String novoNome;
+    private String nomeCadastro;
+    private List<Genero> listaFiltrada;
+    private String mensagemResultadoCadastro = "";
+    private Genero generoPassado;
 
     public List<Genero> getGeneros() {
         if (generos == null) {
@@ -34,43 +33,84 @@ public class GeneroBean {
         return generos;
     }
 
-    public String cadastrar() {
-        try {
-            generoRepository.cadastrar(genero);
-            genero = new Genero(); 
-            generos = null;
-            return "GeneroJSF.xhtml";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+    public String getMensagemResultadoCadastro() {
+        return mensagemResultadoCadastro;
     }
- 
+    
+    public List<Musica> listarMusicas(Genero genero){
+        return genero.getMusicas();
+    }
+
+    public void filtrar() {
+        if (nome == null || nome.isEmpty()) {
+            listaFiltrada = new ArrayList<>();
+            return;
+        }
+        listaFiltrada = generoRepository.buscarPorNome(nome);
+    }
+
+    public String cadastrar() {
+        Genero genero = new Genero();
+        genero.setNome(nomeCadastro);
+        generoRepository.cadastrar(genero);
+        mensagemResultadoCadastro = "Cadastro concluído";
+        return "GeneroJSF.xhtml";
+    }
+    
+    public String enviarParaPaginaDeCadastro(){
+        return "CadastroGenerosJSF.xhtml";
+    }
+
+    public Genero getGeneroPassado() {
+        return generoPassado;
+    }
+    
+    public String enviarParaPaginaDeMusicas(Genero genero){
+        generoPassado = genero;
+        return "MusicasDoGeneroJSF.xhtml";
+    }
+
+    public String getNomeCadastro() {
+        return nomeCadastro;
+    }
+
+    public void setNomeCadastro(String nomeCadastro) {
+        this.nomeCadastro = nomeCadastro;
+    }
+
     public String remover(Genero genero) {
         try {
             boolean removido = generoRepository.remover(genero);
             if (removido) {
-                generos = null; 
+                generos = null;
             } else {
             }
-            return null; 
+            return null;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
-    
+
     public String buscar() {
-        if (nomeBusca != null && !nomeBusca.trim().isEmpty()) {
-            generos = generoRepository.buscarPorNome(nomeBusca);
+        if (nome != null && !nome.trim().isEmpty()) {
+            generos = generoRepository.buscarPorNome(nome);
         } else {
             generos = generoRepository.listar();
         }
-        return null; 
+        return null;
     }
-  
+
     public Genero getGenero() {
         return genero;
+    }
+
+    public List<Genero> getListaFiltrada() {
+        return listaFiltrada;
+    }
+
+    public void setListaFiltrada(List<Genero> listaFiltrada) {
+        this.listaFiltrada = listaFiltrada;
     }
 
     public void setGenero(Genero genero) {
@@ -78,11 +118,12 @@ public class GeneroBean {
     }
 
     public String getNomeBusca() {
-        return nomeBusca;
+        return nome;
     }
 
     public void setNomeBusca(String nomeBusca) {
-        this.nomeBusca = nomeBusca;
+        this.nome = nomeBusca;
+        filtrar();
     }
 
     public String getNovoNome() {
@@ -92,5 +133,4 @@ public class GeneroBean {
     public void setNovoNome(String novoNome) {
         this.novoNome = novoNome;
     }
-
 }

@@ -71,10 +71,14 @@ public class CadastroBean implements Serializable{
             usuario.setLogin(login);
             usuario.setSenha(senha);
             repository.cadastrar(usuario);
-            return "LoginJSG.xhtml";
+            return "LoginJSF.xhtml";
         }else{
             mensagem = "Cadastro não concluído";
             return "";
         }
+    }
+    
+    public String trazerParaPagina(){
+        return "CadastroJSF.xhtml";
     }
 }

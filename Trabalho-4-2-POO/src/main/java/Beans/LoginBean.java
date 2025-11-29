@@ -17,6 +17,7 @@ public class LoginBean implements Serializable{
     private String login;
     private String senha;
     private String mensagem = "";
+    private Usuario usuarioLogado;
 
     public String getLogin() {
         return login;
@@ -41,9 +42,18 @@ public class LoginBean implements Serializable{
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
     }
+
+    public Usuario getUsuarioLogado() {
+        return usuarioLogado;
+    }
+
+    public void setUsuarioLogado(Usuario usuarioLogado) {
+        this.usuarioLogado = usuarioLogado;
+    }
     
     public String fazerLogin(){
         Usuario usuarioAuxiliar = repository.buscarPorLogin(login);
+        usuarioLogado = repository.buscarPorLogin(login);
         if(usuarioAuxiliar.getSenha().equals(senha)){
             repository.buscarPorLogin(login).setLogado(true);
             return "InicioJSF.xhtml";
@@ -53,4 +63,7 @@ public class LoginBean implements Serializable{
         }
     }
     
+    public String trazerParaPagina(){
+        return "LoginJSF.xhtml";
+    }
 }

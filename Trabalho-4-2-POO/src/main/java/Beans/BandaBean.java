@@ -55,14 +55,6 @@ public class BandaBean {
         this.nome = nome;
     }
 
-    public BandaRepositoryJPA getRepository() {
-        return repository;
-    }
-
-    public void setRepository(BandaRepositoryJPA repository) {
-        this.repository = repository;
-    }
-
     public String getResultadoRemocao() {
         return resultadoRemocao;
     }

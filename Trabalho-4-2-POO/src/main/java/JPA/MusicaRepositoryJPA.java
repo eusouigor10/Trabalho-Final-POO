@@ -4,12 +4,14 @@ import Entidades.Banda;
 import Entidades.Genero;
 import Entidades.Musica;
 import Repository.MusicaRepository;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import java.util.List;
 
+@Stateless
 public class MusicaRepositoryJPA implements MusicaRepository {
 
     @PersistenceContext(unitName = "BancoDeDadosProjetoFinal")

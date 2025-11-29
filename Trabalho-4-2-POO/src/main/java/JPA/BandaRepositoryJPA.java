@@ -3,11 +3,13 @@ package JPA;
 
 import Entidades.Banda;
 import Repository.BandaRepository;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import java.util.List;
 
+@Stateless
 public class BandaRepositoryJPA implements BandaRepository{
     
     @PersistenceContext(unitName = "BancoDeDadosProjetoFinal")
