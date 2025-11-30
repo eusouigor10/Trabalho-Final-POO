@@ -1,4 +1,3 @@
-
 package JPA;
 
 import Entidades.Genero;
@@ -41,9 +40,8 @@ public class GeneroRepositoryJPA implements GeneroRepository{
     @Transactional
     public boolean remover(Genero genero) {
 
-        genero = em.merge(genero); // garantir que está gerenciado
+        genero = em.merge(genero);
 
-    // só remove se NÃO tiver músicas
         if (!genero.getMusicas().isEmpty()) {
             return false;
     }

@@ -14,8 +14,8 @@ public class Musica {
     @GeneratedValue
     private int id;
 
-    private String nome;         // novo campo
-    private boolean favorita;    // novo campo
+    private String nome;         
+    private boolean favorita;    
 
     @ManyToOne
     private Genero genero;
@@ -26,7 +26,6 @@ public class Musica {
     @ManyToMany(mappedBy = "musicasFavoritas")
     private Set<Usuario> usuarios;
 
-    // Getters e Setters
     public int getId() {
         return id;
     }

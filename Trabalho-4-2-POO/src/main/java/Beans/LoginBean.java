@@ -55,13 +55,11 @@ public class LoginBean implements Serializable {
 
         Usuario usuarioAuxiliar = repository.buscarPorLogin(login);
 
-        // Se usuário não existe
         if (usuarioAuxiliar == null) {
             mensagem = "Usuário não encontrado!";
             return null;
         }
 
-        // Se senha correta
         if (usuarioAuxiliar.getSenha().equals(senha)) {
 
             usuarioLogado = usuarioAuxiliar;
@@ -69,11 +67,9 @@ public class LoginBean implements Serializable {
 
             mensagem = "";
 
-            // REDIRECIONA PARA A TELA INÍCIO
             return "InicioJSF?faces-redirect=true";
         }
 
-        // Senha incorreta
         mensagem = "Senha incorreta!";
         return null;
     }

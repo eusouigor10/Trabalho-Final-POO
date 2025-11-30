@@ -26,7 +26,6 @@ public class BandaRepositoryJPA implements BandaRepository {
 
         Banda gerenciada = em.merge(banda);
 
-        // CORRETO (não pode remover se tiver músicas)
         if (!gerenciada.getMusicas().isEmpty()) {
             return false;
         }
