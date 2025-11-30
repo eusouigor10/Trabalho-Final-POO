@@ -64,13 +64,8 @@ public class CadastroBean implements Serializable{
     }
  
     public String cadastrar(){
-        Usuario usuario = new Usuario();
         
         if(senha.equals(senhaConfirmada)){
-            usuario.setNome(nome);
-            usuario.setLogin(login);
-            usuario.setSenha(senha);
-            repository.cadastrar(usuario);
             return "LoginJSF.xhtml";
         }else{
             mensagem = "Cadastro não concluído";

@@ -73,14 +73,29 @@
                 cursor: pointer;
                 transition: 0.3s;
             }
-            .btn-view { background-color: #8e44ad; color: white; }
-            .btn-view:hover { background-color: #732d91; }
+            .btn-view {
+                background-color: #8e44ad;
+                color: white;
+            }
+            .btn-view:hover {
+                background-color: #732d91;
+            }
 
-            .btn-edit { background-color: #f39c12; color: white; }
-            .btn-edit:hover { background-color: #d68910; }
+            .btn-edit {
+                background-color: #f39c12;
+                color: white;
+            }
+            .btn-edit:hover {
+                background-color: #d68910;
+            }
 
-            .btn-remove { background-color: #e74c3c; color: white; }
-            .btn-remove:hover { background-color: #c0392b; }
+            .btn-remove {
+                background-color: #e74c3c;
+                color: white;
+            }
+            .btn-remove:hover {
+                background-color: #c0392b;
+            }
 
             .message {
                 margin-top: 20px;
@@ -90,71 +105,73 @@
             }
         </style>
 
-        <h1 class="page-title">🎵 Gerenciar Bandas</h1>
+        <div rendered="#{loginBean.usuarioLogado.logado and loginBean.usuarioLogado != null}">
+            <h1 class="page-title">🎵 Gerenciar Bandas</h1>
 
-        <!-- BOTÃO PARA CADASTRAR -->
-        <h:form>
-            <h:commandButton value="Cadastrar Nova Banda"
-                             styleClass="btn-primary"
-                             action="#{bandaBean.irParaCadastro}" />
-        </h:form>
+            <!-- BOTÃO PARA CADASTRAR -->
+            <h:form>
+                <h:commandButton value="Cadastrar Nova Banda"
+                                 styleClass="btn-primary"
+                                 action="#{bandaBean.irParaCadastro}" />
+            </h:form>
 
-        <h2 class="section-title">Buscar Bandas</h2>
+            <h2 class="section-title">Buscar Bandas</h2>
 
-        <!-- FORM DE BUSCA -->
-        <h:form>
-            <h:panelGrid columns="3" styleClass="search-grid">
-                <h:outputLabel value="Nome:" />
-                <h:inputText value="#{bandaBean.nome}" style="padding:6px; border-radius:6px; border:1px solid #ccc;" />
-                <h:commandButton value="Buscar" styleClass="btn-primary" action="#{bandaBean.filtrar}" />
-            </h:panelGrid>
-        </h:form>
+            <!-- FORM DE BUSCA -->
+            <h:form>
+                <h:panelGrid columns="3" styleClass="search-grid">
+                    <h:outputLabel value="Nome:" />
+                    <h:inputText value="#{bandaBean.nome}" style="padding:6px; border-radius:6px; border:1px solid #ccc;" />
+                    <h:commandButton value="Buscar" styleClass="btn-primary" action="#{bandaBean.filtrar}" />
+                </h:panelGrid>
+            </h:form>
 
-        <!-- MENSAGENS -->
-        <h:outputText value="#{bandaBean.resultadoRemocao}"
-                      rendered="#{bandaBean.resultadoRemocao != null}"
-                      styleClass="message" />
+            <!-- MENSAGENS -->
+            <h:outputText value="#{bandaBean.resultadoRemocao}"
+                          rendered="#{bandaBean.resultadoRemocao != null}"
+                          styleClass="message" />
 
-        <!-- TABELA -->
-        <h:dataTable value="#{bandaBean.listaFiltrada}"
-                     var="banda"
-                     border="1">
+            <!-- TABELA -->
+            <h:dataTable value="#{bandaBean.listaFiltrada}"
+                         var="banda"
+                         border="1">
 
-            <h:column>
-                <f:facet name="header">Nome</f:facet>
-                <h:outputText value="#{banda.nome}" />
-            </h:column>
+                <h:column>
+                    <f:facet name="header">Nome</f:facet>
+                    <h:outputText value="#{banda.nome}" />
+                </h:column>
 
-            <!-- MÚSICAS -->
-            <h:column>
-                <f:facet name="header">Músicas</f:facet>
-                <h:form>
-                    <h:commandButton value="Ver Músicas" styleClass="btn-action btn-view"
-                                     action="#{bandaBean.selecionar(banda)}" />
-                </h:form>
-            </h:column>
+                <!-- MÚSICAS -->
+                <h:column>
+                    <f:facet name="header">Músicas</f:facet>
+                    <h:form>
+                        <h:commandButton value="Ver Músicas" styleClass="btn-action btn-view"
+                                         action="#{bandaBean.selecionar(banda)}" />
+                    </h:form>
+                </h:column>
 
-            <!-- EDITAR -->
-            <h:column rendered="#{bandaBean.admin}">
-                <f:facet name="header">Editar</f:facet>
-                <h:form>
-                    <h:commandButton value="Editar" styleClass="btn-action btn-edit"
-                                     action="#{bandaBean.irParaEdicao(banda)}" />
-                </h:form>
-            </h:column>
+                <!-- EDITAR -->
+                <h:column rendered="#{loginBean.usuarioLogado.adm}">
+                    <f:facet name="header">Editar</f:facet>
+                    <h:form>
+                        <h:commandButton value="Editar" styleClass="btn-action btn-edit"
+                                         action="#{bandaBean.irParaEdicao(banda)}" />
+                    </h:form>
+                </h:column>
 
-            <!-- REMOVER -->
-            <h:column rendered="#{bandaBean.admin}">
-                <f:facet name="header">Remover</f:facet>
-                <h:form>
-                    <h:commandButton value="Remover" styleClass="btn-action btn-remove"
-                                     action="#{bandaBean.remover(banda)}"
-                                     onclick="return confirm('Tem certeza que deseja remover esta banda?')" />
-                </h:form>
-            </h:column>
+                <!-- REMOVER -->
+                <h:column rendered="#{loginBean.usuarioLogado.adm}">
+                    <f:facet name="header">Remover</f:facet>
+                    <h:form>
+                        <h:commandButton value="Remover" styleClass="btn-action btn-remove"
+                                         action="#{bandaBean.remover(banda)}"
+                                         onclick="return confirm('Tem certeza que deseja remover esta banda?')" />
+                    </h:form>
+                </h:column>
 
-        </h:dataTable>
+            </h:dataTable>
 
+        </div>
     </ui:define>
 
 </ui:composition>

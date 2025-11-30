@@ -57,5 +57,12 @@ public class UsuarioRepositoryJPA implements UsuarioRepository {
 
         return lista.isEmpty() ? null : lista.get(0);
     }
+
+    @Override
+    public Usuario buscarPorNome(String nome) {
+        return em.createQuery(
+        "SELECT u FROM Usuario u WHERE u.nome = :nome", Usuario.class).setParameter("nome", nome)
+                .getSingleResult();
+    }
     
 }

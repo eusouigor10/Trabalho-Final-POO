@@ -1,11 +1,45 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="jakarta.faces.html">
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Página do usuário</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <div rendered="#{loginBean.usuarioLogado.logado and loginBean.usuarioLogado != null}">
+            <h:form> 
+                <h:outputText value="INFORMAÇÕES DO USUÁRIO" /> <br/>
+                <h:outputText value="Nome: #{usuarioBean.usuarioAtual.nome}" /> <br/>
+                <h:outputText value="Login: #{loginBean.usuarioLogado.login}" /> <br/>
+            </h:form>
+            <h:form id="formInfos">
+                <h:panelGroup id="painelSenha">
+
+                    <h:outputText id="senhaVelada" 
+                                  value="Senha: ••••••••" 
+                                  rendered="#{!usuarioBean.mostrarSenha}" /> 
+
+                    <h:outputText id="senhaRevelada" 
+                                  value="Senha: #{usuarioBean.senhaAtual}" 
+                                  rendered="#{usuarioBean.mostrarSenha}" />
+                </h:panelGroup>
+
+                <h:commandLink action="#{usuarioBean.toggleMostrarSenha}" 
+                               value="#{usuarioBean.mostrarSenha ? 'Ocultar Senha ' : 'Clique aqui para mostrar a senha '}" >
+
+                    <f:ajax render="painelSenha" />
+                </h:commandLink>
+
+            </h:form>
+            <h:form>
+                <h:outputText value="Editar nome: insira o novo nome " /> <h:inputText value="#{usuarioBean.novoNome}" />
+                <h:commandButton value=" Confirmar edição de nome" action="#{usuarioBean.editarNome()}" /> <br/>
+                <h:outputText value="Alterar senha: insira a nova senha " /> <h:inputText value="#{usuarioBean.novaSenha}" /> <br/>
+                <h:outputText value="Confirme a senha atual " /> <h:inputText value="#{usuarioBean.senhaAtual}" /> <br/>
+                <h:commandButton value="Confirmar edição de senha " action="#{usuarioBean.alterarSenha()}"/> 
+                <h:outputText value="#{usuarioBean.mensagemSenha}" /> <br/>
+            </h:form>
+        </div>
     </h:body>
 </html>

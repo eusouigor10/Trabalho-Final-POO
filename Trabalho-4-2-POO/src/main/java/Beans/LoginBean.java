@@ -64,7 +64,6 @@ public class LoginBean implements Serializable {
 
             usuarioLogado = usuarioAuxiliar;
             usuarioLogado.setLogado(true);
-
             mensagem = "";
 
             return "InicioJSF?faces-redirect=true";

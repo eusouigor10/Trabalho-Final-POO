@@ -16,4 +16,6 @@ public interface UsuarioRepository {
     public Usuario criacaoUsuarioAdmin(Usuario usuario);
     
     public boolean verificacaoExistenciaUsuario(Usuario usuario);
+    
+    public Usuario buscarPorNome(String nome);
 }

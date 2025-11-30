@@ -16,7 +16,7 @@ public class Usuario {
     private String nome;
     private String login;
     private String senha;
-    private boolean adm;
+    private boolean adm = false;
     private boolean logado = false;
 
     public String getLogin() {

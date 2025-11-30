@@ -17,22 +17,11 @@ public class BoasVindasBean {
         usuario = repository.criacaoUsuarioAdmin(usuario);
     }
 
-    public String fazerCadastro() {
-        if (repository.verificacaoExistenciaUsuario(usuario)) {
-            return "CadastroJSF.xhtml";
-        } else {
-            repository.cadastrar(usuario);
-            return "CadastroJSF.xhtml";
-        }
+    public String fazerCadastro() {    
+        return "CadastroJSF.xhtml";
     }
 
     public String fazerLogin() {
-        if (repository.verificacaoExistenciaUsuario(usuario)) {
-            return "LoginJSF.xhtml";
-        } else {
-            repository.cadastrar(usuario);
-            return "LoginJSF.xhtml";
-        }
+        return "LoginJSF.xhtml";
     }
-
 }

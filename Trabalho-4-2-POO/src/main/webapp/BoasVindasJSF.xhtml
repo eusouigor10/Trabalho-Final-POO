@@ -61,24 +61,26 @@
             }
         </style>
 
-        <div class="welcome-box">
-            <h1>Bem-vindo ao Spobrefy!</h1>
-            <h3>Escolha abaixo como deseja continuar:</h3>
-        </div>
-
-        <h:form>
-            <div class="btn-container">
-
-                <h:commandButton styleClass="btn-option"
-                                 value="Cadastrar-se"
-                                 action="#{cadastroBean.trazerParaPagina()}" />
-
-                <h:commandButton styleClass="btn-option"
-                                 value="Fazer login"
-                                 action="#{loginBean.trazerParaPagina()}" />
-
+        <div>
+            <div class="welcome-box">
+                <h1>Bem-vindo ao Spobrefy!</h1>
+                <h3>Escolha abaixo como deseja continuar:</h3>
             </div>
-        </h:form>
+
+            <h:form>
+                <div class="btn-container">
+
+                    <h:commandButton styleClass="btn-option"
+                                     value="Cadastrar-se"
+                                     action="#{cadastroBean.trazerParaPagina()}" />
+
+                    <h:commandButton styleClass="btn-option"
+                                     value="Fazer login"
+                                     action="#{loginBean.trazerParaPagina()}" />
+
+                </div>
+            </h:form>
+        </div>
 
     </ui:define>
 

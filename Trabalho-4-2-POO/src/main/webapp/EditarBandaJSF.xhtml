@@ -85,7 +85,7 @@
 
         <h1 class="page-title">🎸 Editar Banda</h1>
 
-        <div class="form-container">
+        <div class="form-container" rendered="#{loginBean.usuarioLogado.logado and loginBean.usuarioLogado != null}">
             <h:form>
 
                 <h:panelGrid columns="2" columnClasses="form-grid-label,form-grid-input" styleClass="form-grid" cellpadding="8">

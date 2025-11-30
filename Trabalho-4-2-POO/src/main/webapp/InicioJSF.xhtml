@@ -7,8 +7,9 @@
 
     <ui:define name="titulo">Página inicial</ui:define>
 
-    <ui:define name="conteudo">
-        Olá, escolha uma opção no menu acima
-    </ui:define>
-
+    <div rendered="#{loginBean.usuarioLogado.logado and loginBean.usuarioLogado != null}">
+        <ui:define name="conteudo">
+            Olá, escolha uma opção no menu acima
+        </ui:define>
+    </div>
 </ui:composition>

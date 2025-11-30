@@ -75,14 +75,29 @@
                 cursor: pointer;
                 transition: 0.3s;
             }
-            .btn-view { background-color: #8e44ad; color: white; }
-            .btn-view:hover { background-color: #732d91; }
+            .btn-view {
+                background-color: #8e44ad;
+                color: white;
+            }
+            .btn-view:hover {
+                background-color: #732d91;
+            }
 
-            .btn-edit { background-color: #f39c12; color: white; }
-            .btn-edit:hover { background-color: #d68910; }
+            .btn-edit {
+                background-color: #f39c12;
+                color: white;
+            }
+            .btn-edit:hover {
+                background-color: #d68910;
+            }
 
-            .btn-remove { background-color: #e74c3c; color: white; }
-            .btn-remove:hover { background-color: #c0392b; }
+            .btn-remove {
+                background-color: #e74c3c;
+                color: white;
+            }
+            .btn-remove:hover {
+                background-color: #c0392b;
+            }
 
             .message {
                 margin-top: 20px;
@@ -93,64 +108,65 @@
 
         <h1 class="page-title">🎼 Gerenciar Gêneros</h1>
 
-        <!-- BOTÃO PARA CADASTRAR -->
-        <h:form>
-            <h:commandButton value="Cadastrar Novo Gênero"
-                             styleClass="btn-primary"
-                             action="#{generoBean.enviarParaPaginaDeCadastro()}" />
-        </h:form>
+        <div rendered="#{loginBean.usuarioLogado.logado and loginBean.usuarioLogado != null}">
+            <h:form>
+                <h:commandButton value="Cadastrar Novo Gênero"
+                                 styleClass="btn-primary"
+                                 action="#{generoBean.enviarParaPaginaDeCadastro()}" />
+            </h:form>
 
-        <h2 class="section-title">Buscar Gêneros</h2>
+            <h2 class="section-title">Buscar Gêneros</h2>
 
-        <h:form>
-            <h:panelGrid columns="3" styleClass="search-grid">
-                <h:outputLabel value="Nome:" />
-                <h:inputText value="#{generoBean.nomeBusca}" style="padding:6px; border-radius:6px; border:1px solid #ccc;">
-                    <f:ajax event="keyup" render="tabela" />
-                </h:inputText>
-                <h:commandButton value="Buscar" styleClass="btn-primary" action="#{generoBean.buscar}" />
-            </h:panelGrid>
-        </h:form>
+            <h:form>
+                <h:panelGrid columns="3" styleClass="search-grid">
+                    <h:outputLabel value="Nome:" />
+                    <h:inputText value="#{generoBean.nomeBusca}" style="padding:6px; border-radius:6px; border:1px solid #ccc;">
+                        <f:ajax event="keyup" render="tabela" />
+                    </h:inputText>
+                    <h:commandButton value="Buscar" styleClass="btn-primary" action="#{generoBean.buscar}" />
+                </h:panelGrid>
+            </h:form>
 
-        <!-- TABELA -->
-        <h:dataTable id="tabela"
-                     value="#{empty generoBean.listaFiltrada ? generoBean.generos : generoBean.listaFiltrada}"
-                     var="g" border="1">
+            <!-- TABELA -->
+            <h:dataTable id="tabela"
+                         value="#{empty generoBean.listaFiltrada ? generoBean.generos : generoBean.listaFiltrada}"
+                         var="g" border="1">
 
-            <h:column>
-                <f:facet name="header">Gênero</f:facet>
-                <h:outputText value="#{g.nome}" />
-            </h:column>
+                <h:column>
+                    <f:facet name="header">Gênero</f:facet>
+                    <h:outputText value="#{g.nome}" />
+                </h:column>
 
-            <h:column>
-                <f:facet name="header">Músicas</f:facet>
-                <h:form>
-                    <h:commandButton value="Ver Músicas" styleClass="btn-action btn-view"
-                                     action="#{generoBean.enviarParaPaginaDeMusicas(g)}" />
-                </h:form>
-            </h:column>
+                <h:column>
+                    <f:facet name="header">Músicas</f:facet>
+                    <h:form>
+                        <h:commandButton value="Ver Músicas" styleClass="btn-action btn-view"
+                                         action="#{generoBean.enviarParaPaginaDeMusicas(g)}" />
+                    </h:form>
+                </h:column>
 
-            <h:column>
-                <f:facet name="header">Editar</f:facet>
-                <h:form>
-                    <h:commandButton value="Editar" styleClass="btn-action btn-edit"
-                                     action="#{generoBean.enviarParaPaginaDeEdicao(g)}" />
-                </h:form>
-            </h:column>
+                <h:column rendered="#{loginBean.usuarioLogado.adm}">
+                        <f:facet name="header">Editar</f:facet>
+                        <h:form>
+                            <h:commandButton value="Editar" styleClass="btn-action btn-edit"
+                                             action="#{generoBean.enviarParaPaginaDeEdicao(g)}" />
+                        </h:form>
+                    </h:column>
 
-            <h:column>
-                <f:facet name="header">Remover</f:facet>
-                <h:form>
-                    <h:commandButton value="Remover" styleClass="btn-action btn-remove"
-                                     action="#{generoBean.remover(g)}"
-                                     onclick="return confirm('Tem certeza que deseja remover este gênero?')" />
-                </h:form>
-            </h:column>
+                    <h:column rendered="#{loginBean.usuarioLogado.adm}">
+                        <f:facet name="header">Remover</f:facet>
+                        <h:form>
+                            <h:commandButton value="Remover" styleClass="btn-action btn-remove"
+                                             action="#{generoBean.remover(g)}"
+                                             onclick="return confirm('Tem certeza que deseja remover este gênero?')" />
+                        </h:form>
+                    </h:column>
 
-        </h:dataTable>
+            </h:dataTable>
 
-        <h:outputText value="#{generoBean.mensagemResultadoCadastro}" styleClass="message" />
+            <h:outputText value="#{generoBean.mensagemResultadoCadastro}" styleClass="message" />
 
+        </div>
     </ui:define>
 
 </ui:composition>

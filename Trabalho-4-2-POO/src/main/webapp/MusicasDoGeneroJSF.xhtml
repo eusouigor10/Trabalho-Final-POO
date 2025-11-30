@@ -6,39 +6,40 @@
                 xmlns:ui="jakarta.faces.facelets"
                 template="template.xhtml">
 
-    <ui:define name="title">Músicas do Gênero</ui:define>
+    <div rendered="#{loginBean.usuarioLogado.logado and loginBean.usuarioLogado != null}">
+        <ui:define name="title">Músicas do Gênero</ui:define>
 
-    <ui:define name="content">
+        <ui:define name="content">
 
-        <h1>🎼 Músicas do gênero: #{generoBean.generoPassado.nome}</h1>
+            <h1>🎼 Músicas do gênero: #{generoBean.generoPassado.nome}</h1>
 
-        <!-- TABELA DE MÚSICAS -->
-        <h:dataTable value="#{generoBean.generoPassado.musicas}"
-                     var="m"
-                     border="1">
+            <!-- TABELA DE MÚSICAS -->
+            <h:dataTable value="#{generoBean.generoPassado.musicas}"
+                         var="m"
+                         border="1">
 
-            <!-- Nome -->
-            <h:column>
-                <f:facet name="header">Nome</f:facet>
-                <h:outputText value="#{m.nome}" />
-            </h:column>
+                <!-- Nome -->
+                <h:column>
+                    <f:facet name="header">Nome</f:facet>
+                    <h:outputText value="#{m.nome}" />
+                </h:column>
 
-            <!-- Duração -->
-            <h:column>
-                <f:facet name="header">Duração</f:facet>
-                <h:outputText value="#{m.duracao}" />
-            </h:column>
+                <!-- Duração -->
+                <h:column>
+                    <f:facet name="header">Duração</f:facet>
+                    <h:outputText value="#{m.duracao}" />
+                </h:column>
 
-        </h:dataTable>
+            </h:dataTable>
 
-        <br/>
+            <br/>
 
-        <!-- BOTÃO VOLTAR -->
-        <h:form>
-            <h:commandButton value="Voltar"
-                             action="GeneroJSF?faces-redirect=true" />
-        </h:form>
+            <!-- BOTÃO VOLTAR -->
+            <h:form>
+                <h:commandButton value="Voltar"
+                                 action="GeneroJSF?faces-redirect=true" />
+            </h:form>
 
-    </ui:define>
-
+        </ui:define>
+    </div>
 </ui:composition>

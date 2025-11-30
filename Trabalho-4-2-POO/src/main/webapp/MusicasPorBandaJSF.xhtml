@@ -6,35 +6,37 @@
                 xmlns:ui="jakarta.faces.facelets"
                 template="template.xhtml">
 
-    <ui:define name="title">Músicas da Banda</ui:define>
+    <div rendered="#{loginBean.usuarioLogado.logado and loginBean.usuarioLogado != null}">
+        <ui:define name="title">Músicas da Banda</ui:define>
 
-    <ui:define name="content">
+        <ui:define name="content">
 
-        <h1>🎵 Músicas da banda: #{bandaBean.bandaSelecionada.nome}</h1>
+            <h1>🎵 Músicas da banda: #{bandaBean.bandaSelecionada.nome}</h1>
 
-        <h:dataTable value="#{bandaBean.bandaSelecionada.musicas}"
-                     var="m"
-                     border="1">
+            <h:dataTable value="#{bandaBean.bandaSelecionada.musicas}"
+                         var="m"
+                         border="1">
 
-            <h:column>
-                <f:facet name="header">Nome</f:facet>
-                <h:outputText value="#{m.nome}" />
-            </h:column>
+                <h:column>
+                    <f:facet name="header">Nome</f:facet>
+                    <h:outputText value="#{m.nome}" />
+                </h:column>
 
-            <h:column>
-                <f:facet name="header">Duração</f:facet>
-                <h:outputText value="#{m.duracao}" />
-            </h:column>
+                <h:column>
+                    <f:facet name="header">Duração</f:facet>
+                    <h:outputText value="#{m.duracao}" />
+                </h:column>
 
-        </h:dataTable>
+            </h:dataTable>
 
-        <br/>
+            <br/>
 
-        <h:form>
-            <h:commandButton value="Voltar"
-                             action="BandaJSF?faces-redirect=true" />
-        </h:form>
+            <h:form>
+                <h:commandButton value="Voltar"
+                                 action="BandaJSF?faces-redirect=true" />
+            </h:form>
 
-    </ui:define>
+        </ui:define>
+    </div>
 
 </ui:composition>
