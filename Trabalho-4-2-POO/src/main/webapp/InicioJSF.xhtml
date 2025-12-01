@@ -7,9 +7,90 @@
 
     <ui:define name="titulo">Página inicial</ui:define>
 
-    <div rendered="#{loginBean.usuarioLogado.logado and loginBean.usuarioLogado != null}">
-        <ui:define name="conteudo">
-            Olá, escolha uma opção no menu acima
-        </ui:define>
-    </div>
+    <ui:define name="content">
+
+        <div rendered="#{loginBean.usuarioLogado.logado and loginBean.usuarioLogado != null}">
+            <h2 style="text-align:center; margin-bottom:30px; color:#2c3e50;">Olá, escolha uma opção no menu abaixo</h2>
+
+            <div style="display:flex; justify-content:center; gap:25px; flex-wrap:wrap; margin-top:20px;">
+
+                <h:link outcome="BandaJSF" styleClass="quick-access-card">
+                    <div class="card-icon">🎸</div>
+                    <div class="card-title">Bandas</div>
+                    <div class="card-subtitle">Gerencie suas bandas</div>
+                </h:link>
+
+                <h:link outcome="MusicaJSF" styleClass="quick-access-card">
+                    <div class="card-icon">🎵</div>
+                    <div class="card-title">Músicas</div>
+                    <div class="card-subtitle">Adicione músicas, favorite</div>
+                </h:link>
+
+                <h:link outcome="GeneroJSF" styleClass="quick-access-card">
+                    <div class="card-icon">🎼</div>
+                    <div class="card-title">Gêneros</div>
+                    <div class="card-subtitle">Adicione seus gêneros</div>
+                </h:link>
+
+                <h:link outcome="UsuarioJSF" styleClass="quick-access-card">
+                    <div class="card-icon">👤</div>
+                    <div class="card-title">Usuários</div>
+                    <div class="card-subtitle">Meu perfil</div>
+                </h:link>
+
+            </div>
+
+            <style>
+                .quick-access-card {
+                    display:flex;
+                    flex-direction:column;
+                    align-items:center;
+                    justify-content:center;
+                    background: linear-gradient(135deg, #1db954, #1ed760);
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 16px;
+                    padding: 25px 20px;
+                    min-width: 180px;
+                    max-width: 220px;
+                    text-align: center;
+                    box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+                    transition: 0.3s;
+                    flex:1 1 180px;
+                }
+
+                .quick-access-card:hover {
+                    transform: translateY(-5px) scale(1.05);
+                    box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+                    background: linear-gradient(135deg, #1ed760, #1db954);
+                }
+
+                .card-icon {
+                    font-size: 3rem;
+                    margin-bottom: 10px;
+                }
+
+                .card-title {
+                    font-size: 1.4rem;
+                    font-weight: bold;
+                    margin-bottom: 6px;
+                }
+
+                .card-subtitle {
+                    font-size: 0.95rem;
+                    color: #f0f0f0;
+                }
+
+                @media (max-width: 600px) {
+                    .quick-access-card {
+                        min-width: 100%;
+                        margin-bottom: 15px;
+                    }
+                }
+            </style>
+
+        </div>
+
+    </ui:define>
+
 </ui:composition>
