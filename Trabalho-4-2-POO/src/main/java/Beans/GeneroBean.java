@@ -165,6 +165,7 @@ public class GeneroBean implements Serializable {
         try {
             generoRepository.editarNome(generoEditando, novoNome);
             mensagemResultadoCadastro = "Gênero alterado com sucesso!";
+            listaFiltrada = generoRepository.listar();
             generos = null;
             return "GeneroJSF.xhtml?faces-redirect=true";
         } catch (Exception e) {
