@@ -16,7 +16,6 @@ public class InicializadorDeAdmin {
 
     @PostConstruct // O método será chamado imediatamente após a injeção de dependência
     public void init() {
-        System.out.println("Verificando usuário Admin...");
         
         // Tentamos buscar o admin
         Usuario adminExistente = repository.buscarPorLogin("admin"); 

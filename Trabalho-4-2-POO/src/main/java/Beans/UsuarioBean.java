@@ -65,7 +65,7 @@ public class UsuarioBean {
     }
     
     public void toggleMostrarSenha(){
-        this.mostrarSenha = !this.mostrarSenha;
+        this.mostrarSenha = true;
     }
 
     public boolean isMostrarSenha() {

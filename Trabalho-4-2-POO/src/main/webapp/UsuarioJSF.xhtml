@@ -116,7 +116,8 @@
                                       style="padding:8px 12px; border:1px solid #ccc; border-radius:6px; min-width:150px; display:inline-block;" />
 
                         <h:commandButton action="#{usuarioBean.toggleMostrarSenha}"
-                                         value="#{usuarioBean.mostrarSenha ? 'Ocultar' : 'Mostrar'}"
+                                         value="Mostrar"
+                                         rendered="#{!usuarioBean.mostrarSenha}"
                                          styleClass="btn btn-blue">
                             <f:ajax render="painelSenha" />
                         </h:commandButton>
