@@ -1,25 +1,110 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="jakarta.faces.html"
-      xmlns:f="jakarta.faces.core">
-    <h:head>
-        <title>Página de cadastro de músicas</title>
-    </h:head>
-    <h:body>
-        <div rendered="#{loginBean.usuarioLogado.logado and loginBean.usuarioLogado != null}" >
-            <h:form>
-                <h:outputText value="Insira o nome da música " /> <h:inputText value="#{musicaBean.nome}" /> <br/>
-                <h:selectOneMenu value="#{musicaBean.generoSelecionado}" >
-                    <f:selectItem itemLabel="Selecione o gênero" noSelectionOption="false" />
-                    <f:selectItems var="g" itemLabel="#{g.nome}" value="#{generoBean.generos}" itemValue="#{g.nome}"/>
-                </h:selectOneMenu> <br/>
-                <h:selectOneMenu value="#{musicaBean.bandaSelecionada}" >
-                    <f:selectItem itemLabel="Seleciona a banda" noSelectionOption="false" />
-                    <f:selectItems var="b" itemLabel="#{b.nome}" value="#{bandaBean.bandas()}" itemValue="#{b.nome}"/>
-                </h:selectOneMenu>
-                <h:commandButton value="Cadastrar" action="#{musicaBean.cadastrarMusica()}" />
-            </h:form>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets"
+                template="template.xhtml">
+
+    <ui:define name="title">
+        Cadastro de Músicas
+    </ui:define>
+
+    <ui:define name="content">
+
+        <style>
+            .page-title {
+                font-size: 2.2rem;
+                font-weight: bold;
+                margin-bottom: 25px;
+                color: #2c3e50;
+                text-align: center;
+            }
+
+            .form-box {
+                background: #fdfdfd;
+                padding: 25px;
+                border-radius: 10px;
+                width: 60%;
+                margin: 0 auto;
+                box-shadow: 0 0 10px rgba(0,0,0,0.08);
+            }
+
+            label {
+                font-size: 1.1rem;
+                color: #34495e;
+                font-weight: bold;
+            }
+
+            .input-field {
+                width: 100%;
+                padding: 8px;
+                margin-top: 5px;
+                margin-bottom: 15px;
+                border-radius: 6px;
+                border: 1px solid #ccc;
+                font-size: 1rem;
+            }
+
+            .btn-primary {
+                background-color: #3498db;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 8px;
+                border: none;
+                cursor: pointer;
+                transition: 0.3s;
+                font-size: 1.1rem;
+            }
+            .btn-primary:hover {
+                background-color: #2980b9;
+            }
+        </style>
+
+        <div rendered="#{loginBean.usuarioLogado.logado and loginBean.usuarioLogado != null}">
+
+            <h1 class="page-title">🎵 Cadastrar Nova Música</h1>
+
+            <div class="form-box">
+
+                <h:form>
+
+                    <label>Nome da Música:</label>
+                    <h:inputText value="#{musicaBean.nome}" 
+                                 styleClass="input-field" />
+
+                    <label>Gênero:</label>
+                    <h:selectOneMenu value="#{musicaBean.generoSelecionado}" 
+                                     styleClass="input-field">
+                        <f:selectItem itemLabel="Selecione o gênero" noSelectionOption="false" />
+                        <f:selectItems var="g"
+                                       value="#{generoBean.generos}"
+                                       itemLabel="#{g.nome}"
+                                       itemValue="#{g.nome}" />
+                    </h:selectOneMenu>
+
+                    <label>Banda:</label>
+                    <h:selectOneMenu value="#{musicaBean.bandaSelecionada}" 
+                                     styleClass="input-field">
+                        <f:selectItem itemLabel="Selecione a banda" noSelectionOption="false" />
+                        <f:selectItems var="b"
+                                       value="#{bandaBean.bandas()}"
+                                       itemLabel="#{b.nome}"
+                                       itemValue="#{b.nome}" />
+                    </h:selectOneMenu>
+
+                    <!-- Botão -->
+                    <h:commandButton value="Cadastrar"
+                                     styleClass="btn-primary"
+                                     action="#{musicaBean.cadastrarMusica()}" />
+
+                </h:form>
+            </div>
+
         </div>
-    </h:body>
-</html>
+
+    </ui:define>
+
+</ui:composition>

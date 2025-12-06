@@ -20,6 +20,8 @@ public interface MusicaRepository {
     
     public void desmarcarFavorita(Musica musica);
     
+    public void editar(Musica musica);
+    
     public void editarNome(Musica musica, String novoNome);
     
     public void editarGenero(Musica musica, Genero novoGenero);

@@ -44,6 +44,11 @@ public class MusicaRepositoryJPA implements MusicaRepository {
         query.setParameter("banda", banda);
         return query.getResultList();
     }
+    
+    @Override
+    public void editar(Musica musica){
+        em.merge(musica);
+    }
 
     @Override
     @Transactional

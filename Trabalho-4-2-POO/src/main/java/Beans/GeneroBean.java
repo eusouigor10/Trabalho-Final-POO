@@ -41,6 +41,13 @@ public class GeneroBean implements Serializable {
     public List<Musica> listarMusicas(Genero genero) {
         return genero.getMusicas();
     }
+    
+    public List<Genero> listarGeneros() {
+        if (generos == null) {
+            generos = generoRepository.listar();
+        }
+        return generos;
+    }
 
     public void filtrar() {
         if (nome == null || nome.isEmpty()) {

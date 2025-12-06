@@ -1,11 +1,127 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="jakarta.faces.html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-    </h:body>
-</html>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:ui="jakarta.faces.facelets"
+                template="template.xhtml">
+
+    <ui:define name="title">Editar Música</ui:define>
+
+    <ui:define name="content">
+
+        <style>
+            .page-title {
+                font-size: 2rem;
+                font-weight: bold;
+                margin-bottom: 20px;
+                color: #2c3e50;
+                text-align: center;
+            }
+
+            .form-container {
+                background: #f7f7f7;
+                padding: 25px;
+                border-radius: 12px;
+                width: 480px;
+                margin: 0 auto;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+
+            .form-grid label {
+                font-weight: bold;
+                color: #34495e;
+            }
+
+            .form-grid input, .form-grid select {
+                padding: 8px;
+                border-radius: 6px;
+                border: 1px solid #ccc;
+                width: 100%;
+            }
+
+            .static-text {
+                padding: 8px;
+                background: #ecf0f1;
+                border-radius: 6px;
+                color: #2c3e50;
+            }
+
+            .btn-row {
+                margin-top: 20px;
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .btn {
+                padding: 10px 18px;
+                border-radius: 8px;
+                border: none;
+                cursor: pointer;
+                font-size: 1rem;
+                transition: 0.3s;
+            }
+
+            .btn-save {
+                background-color: #27ae60;
+                color: white;
+            }
+            .btn-save:hover {
+                background-color: #1e8449;
+            }
+
+            .btn-cancel {
+                background-color: #e74c3c;
+                color: white;
+                text-decoration: none;
+                padding: 10px 18px;
+                border-radius: 8px;
+            }
+            .btn-cancel:hover {
+                background-color: #c0392b;
+            }
+        </style>
+
+        <h1 class="page-title">🎵 Editar Música</h1>
+
+        <div class="form-container" rendered="#{loginBean.usuarioLogado.logado}">
+            <h:form>
+
+                <h:panelGrid columns="2" cellpadding="8" styleClass="form-grid">
+
+                    <h:outputLabel value="Nome atual:" />
+                    <h:outputText value="#{musicaBean.musicaSelecionada.nome}" styleClass="static-text" />
+
+                    <h:outputLabel value="Novo nome:" />
+                    <h:inputText value="#{musicaBean.novoNome}" required="true" />
+
+                    <h:outputLabel value="Banda atual:" />
+                    <h:outputText value="#{musicaBean.musicaSelecionada.banda.nome}" styleClass="static-text" />
+
+                    <h:outputLabel value="Nova banda:" />
+                    <h:selectOneMenu value="#{musicaBean.novaBanda}">
+                        <f:selectItems value="#{bandaBean.listarBandas()}" var="b" itemLabel="#{b.nome}" itemValue="#{b.nome}" />
+                    </h:selectOneMenu>
+
+                    <h:outputLabel value="Gênero atual:" />
+                    <h:outputText value="#{musicaBean.musicaSelecionada.genero.nome}" styleClass="static-text" />
+
+                    <h:outputLabel value="Novo gênero:" />
+                    <h:selectOneMenu value="#{musicaBean.novoGenero}">
+                        <f:selectItems value="#{generoBean.listarGeneros()}" var="g" itemLabel="#{g.nome}" itemValue="#{g.nome}" />
+                    </h:selectOneMenu>
+
+                </h:panelGrid>
+
+                <div class="btn-row">
+                    <h:commandButton value="Salvar" action="#{musicaBean.salvarEdicao}" styleClass="btn btn-save" />
+                    <h:link value="Cancelar" outcome="MusicaJSF" styleClass="btn-cancel" />
+                </div>
+
+            </h:form>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

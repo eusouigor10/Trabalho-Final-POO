@@ -82,6 +82,7 @@ public class BandaBean implements Serializable {
 
         if (removida) {
             resultadoRemocao = "Banda removida com sucesso!";
+            filtrar();
         } else {
             resultadoRemocao = "Não é possível remover: a banda possui músicas cadastradas.";
         }
@@ -92,6 +93,10 @@ public class BandaBean implements Serializable {
     public String selecionar(Banda banda) {
         bandaSelecionada = banda;
         return "MusicasPorBandaJSF?faces-redirect=true";
+    }
+    
+    public List<Banda> listarBandas() {
+        return repository.listar();
     }
 
     public boolean isAdmin() {

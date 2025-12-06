@@ -33,6 +33,11 @@ public class MusicaBean implements Serializable {
     private String nomeSelecionado;
     private String generoSelecionado;
     private String bandaSelecionada;
+    
+    private Musica musicaSelecionada;
+    private String novoNome;
+    private String novaBanda;
+    private String novoGenero;
 
     public String cadastrarMusica() {
         Musica musica = new Musica();
@@ -172,5 +177,57 @@ public class MusicaBean implements Serializable {
 
     public void removerMusica(Musica musica) {
         this.musicaRepository.removerMusica(musica);
+    }
+
+    public Musica getMusicaSelecionada() {
+        return musicaSelecionada;
+    }
+
+    public void setMusicaSelecionada(Musica musicaSelecionada) {
+        this.musicaSelecionada = musicaSelecionada;
+    }
+
+    public String getNovoNome() {
+        return novoNome;
+    }
+
+    public void setNovoNome(String novoNome) {
+        this.novoNome = novoNome;
+    }
+
+    public String getNovaBanda() {
+        return novaBanda;
+    }
+
+    public void setNovaBanda(String novaBanda) {
+        this.novaBanda = novaBanda;
+    }
+
+    public String getNovoGenero() {
+        return novoGenero;
+    }
+
+    public void setNovoGenero(String novoGenero) {
+        this.novoGenero = novoGenero;
+    }
+    
+    public String irParaPaginaDeEdicao(Musica musica) {
+        this.musicaSelecionada = musica;
+        this.novoNome = musica.getNome();
+        this.novaBanda = musica.getBanda().getNome();
+        this.novoGenero = musica.getGenero().getNome();
+
+        return "EditarMusicasJSF.xhtml?faces-redirect=true";
+    }
+    
+    public String salvarEdicao() {
+        musicaSelecionada.setNome(novoNome);
+        Banda b = bandaRepository.buscarPorNomeUnico(novaBanda);
+        musicaSelecionada.setBanda(b);
+        Genero g = generoRepository.buscarPorNomeUnico(novoGenero);
+        musicaSelecionada.setGenero(g);
+        musicaRepository.editar(musicaSelecionada);
+
+        return "MusicaJSF.xhtml?faces-redirect=true";
     }
 }
