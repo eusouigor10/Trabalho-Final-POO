@@ -30,6 +30,7 @@
                 cursor: pointer;
                 transition: 0.3s;
             }
+
             .btn-primary:hover {
                 background-color: #2980b9;
             }
@@ -94,6 +95,42 @@
             .btn-remove {
                 background-color: #e74c3c;
                 color: white;
+            }
+
+            /* --------------------------------------------- */
+            /* BOTÃO FAVORITAR (sem alterar XHTML!)         */
+            /* --------------------------------------------- */
+
+            /* Botões com valor "Favoritar" */
+            input[type="submit"][value="Favoritar"] {
+                padding: 6px 12px;
+                border-radius: 6px;
+                border: none;
+                cursor: pointer;
+                font-weight: bold;
+                background-color: #bdc3c7;
+                color: #2c3e50;
+                transition: 0.3s;
+            }
+
+            input[type="submit"][value="Favoritar"]:hover {
+                background-color: #a6b0b5;
+            }
+
+            /* Botões com valor "Desfavoritar" */
+            input[type="submit"][value="Desfavoritar"] {
+                padding: 6px 12px;
+                border-radius: 6px;
+                border: none;
+                cursor: pointer;
+                font-weight: bold;
+                background-color: #e74c3c;
+                color: white;
+                transition: 0.3s;
+            }
+
+            input[type="submit"][value="Desfavoritar"]:hover {
+                background-color: #c0392b;
             }
         </style>
 
@@ -208,7 +245,7 @@
             <h:form id="favoritasForm">
                 <h:dataTable value="#{musicaBean.listaFavoritas}" var="f">
                     <h:column>
-                        <f:facet name="header">Música</f:facet>
+                        <f:facet name="header">Músicas favoritas</f:facet>
                         <h:outputText value="#{f.nome}" />
                     </h:column>
                 </h:dataTable>
